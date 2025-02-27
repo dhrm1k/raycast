@@ -5,8 +5,78 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #333;
+    /* prevent double-tap zoom on the entire document */
+    touch-action: manipulation;
 }
 
 canvas {
     border: 2px solid #666;
+    /* prevent zooming on canvas */
+    touch-action: none;
+}
+
+/* mobile controls styling */
+.mobile-controls {
+    display: none; /* hide button  on computer*/
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 240px; /* Increased width for larger buttons */
+    padding-bottom: 30px;
+}
+
+.direction-pad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.middle-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 15px 0; /* Increased margin */
+}
+
+.control-btn {
+    width: 80px; /* Increased from 60px */
+    height: 80px; /* Increased from 60px */
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 15px; /* Slightly increased border-radius */
+    color: white;
+    font-size: 32px; /* Increased font size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    /* Prevent double-tap zoom on buttons */
+    touch-action: manipulation;
+}
+
+.control-btn:active {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 768px) {
+    .mobile-controls {
+        display: block;
+    }
+    
+    .canvas-container {
+        position: relative;
+        width: 80%;
+        height: 100vh;
+        margin-top: 10%;
+    }
+    
+    canvas {
+        max-width: 100%;
+        max-height: 65vh; /* Slightly reduced to make more space for larger controls */
+    }
 }

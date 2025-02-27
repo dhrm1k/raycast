@@ -2,18 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>My First Raycaster</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="canvas-container">
         <canvas id="gameCanvas" width="640" height="480"></canvas>
+        
+        <div class="mobile-controls">
+            <div class="direction-pad">
+                <button id="up-btn" class="control-btn up-btn">↑</button>
+                <div class="middle-row">
+                    <button id="left-btn" class="control-btn left-btn">←</button>
+                    <button id="right-btn" class="control-btn right-btn">→</button>
+                </div>
+                <button id="down-btn" class="control-btn down-btn">↓</button>
+            </div>
+        </div>
     </div>
-    
-    
 
     <script src="keyhandler.js"></script>
+    <script src="mobilecontrols.js"></script>
     <script src="game.js"></script>
 </body>
 </html>
