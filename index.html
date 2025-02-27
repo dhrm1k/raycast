@@ -7,8 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas id="gameCanvas" width="640" height="480"></canvas>
+    <div class="canvas-container">
+        <canvas id="gameCanvas" width="640" height="480"></canvas>
+    </div>
+    
+    <div class="controls">
+        <button class="arrow-button up" data-key="ArrowUp"></button>
+        <button class="arrow-button left" data-key="ArrowLeft"></button>
+        <button class="arrow-button right" data-key="ArrowRight"></button>
+        <button class="arrow-button down" data-key="ArrowDown"></button>
+    </div>
+    
+
     <script src="keyhandler.js"></script>
     <script src="game.js"></script>
+    <script src="mobileControls.js"></script>
 </body>
 </html>

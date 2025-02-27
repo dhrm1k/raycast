@@ -51,7 +51,7 @@ class Game {
             const newY = this.player.y - Math.sin(this.player.angle) * this.player.speed;
 
 
-            if (this.map([Math.floor(newX)][Math.floor(newY)]) === 0) {
+            if (this.map[Math.floor(newX)][Math.floor(newY)] === 0) {
                 this.player.x = newX;
                 this.player.y = newY;
             }
@@ -69,34 +69,29 @@ class Game {
 
 
     //draw function start
+
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = '#000';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.beginPath();
-
-        this.ctx.fillStyle = "red";
-
-        this.ctx.arc(this.player.x * 50, this.player.y * 50, 5, 0, Math.PI*2);
-
-        this.ctx.fill();
-
-        //logic to draw rays
-
-        this.ctx.strokeStyle = '#FFFF00';
         const FOV = Math.PI / 3;
-        const numRays = 100;
-        for (let i = 0; i < numRays; i++) {
-            const rayAngle = this.player.angle - FOV / 2 + (i / numRays) * FOV;
-            const [distance, _] = this.castRay(rayAngle);
-            const endX = this.player.x + Math.cos(rayAngle) * distance;
-            const endY = this.player.y + Math.sin(rayAngle) * distance;
-            this.ctx.beginPath();
-            this.ctx.moveTo(this.player.x * 50, this.player.y * 50);
-            this.ctx.lineTo(endX * 50, endY * 50);
-            this.ctx.stroke();
-        }
+        const rayCount = this.canvas.width;
 
+        for (let i = 0; i < rayCount; i++) {
+            const rayAngle = this.player.angle - FOV / 2 + (i / rayCount) * FOV;
+            const [distance, wallType] = this.castRay(rayAngle);
+
+            const wallHeight = (this.canvas.height / distance) * 0.5;
+            this.ctx.fillStyle = '#FF0000'; // Change wall color to red
+            this.ctx.fillRect(
+                i,
+                (this.canvas.height - wallHeight) / 2,
+                1,
+                wallHeight
+            );
+        }
     }
+
     //draw function end
 
     castRay(angle) {
